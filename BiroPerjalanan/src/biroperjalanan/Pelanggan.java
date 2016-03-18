@@ -6,7 +6,7 @@
 
 /**
  *
- * @author anuge
+ * @author dwiki
  */
 public class Pelanggan extends Orang{
     private String nama;
