@@ -6,7 +6,7 @@
 
 /**
  *
- * @author anuge
+ * @author dwiki
  */
 public class TempatWisata {
     private String namaTempat;
