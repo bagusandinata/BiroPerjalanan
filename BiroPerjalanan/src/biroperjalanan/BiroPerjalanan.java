@@ -23,8 +23,7 @@ public class BiroPerjalanan {
         pw.addDaftarTujuanWisata(tw1);
         pw.addDaftarTujuanWisata(tw2);
         
-        Petugas pet1 = new Petugas("Bagus","A201B", "081559955105");
-        pet1.setAlamat("perumahan guru");
+        Petugas pet1 = new Petugas("Bagus","A201B", "081559955105","perumahan guru");
         
 	Pelanggan pel1 = new Pelanggan("Anugerah","B3685A", "081559955105");
 	pel1.setKota("Surabaya");
