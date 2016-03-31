@@ -44,5 +44,8 @@ public class Main {
         System.out.println("Kota                : "+p.getPelangganId("C755FA").getKota());
         System.out.println("No. HP              : "+p.getPelangganId("C755FA").getNoHP());
         System.out.println("Harga Perjalanan    : "+p.getTotalHarga("A305B"));
+        
+        pw.removeTempatWisata("A304B");
+        System.out.println(pw.getTempatWisataIndex(0).getNamaTempat());
     }
 }
