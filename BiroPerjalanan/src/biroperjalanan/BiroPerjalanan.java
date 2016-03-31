@@ -1,9 +1,10 @@
+package biroperjalanan;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package biroperjalanan;
+
 
 /**
  *
@@ -25,7 +26,7 @@ public class BiroPerjalanan {
         
         Petugas pet1 = new Petugas("Bagus","A201B", "081559955105","perumahan guru");
         
-	Pelanggan pel1 = new Pelanggan("Anugerah","B3685A", "081559955105");
+	Pelanggan pel1 = new Pelanggan("Giri","B3685A", "081559955105");
 	pel1.setKota("Surabaya");
         p.addPelanggan(pel1);
         p.setPaket(pw);
@@ -38,7 +39,7 @@ public class BiroPerjalanan {
         
         System.out.println();
         
-        Pelanggan pel2 = new Pelanggan("Dinata","C755FA", "081559955105");
+        Pelanggan pel2 = new Pelanggan("Dwiki","C755FA", "081559955105");
 	pel2.setKota("Jakarta");
         p.addPelanggan(pel2);
         p.setPaket(pw);
