@@ -6,7 +6,7 @@
 
 /**
  *
- * @author dwiki
+ * @author anuge
  */
 public class Pelanggan extends Orang{
     private String nama;
@@ -16,6 +16,20 @@ public class Pelanggan extends Orang{
     
     public Pelanggan(String nama, String idPelanggan, String noHP) {
         super(nama, noHP);
+        this.idPelanggan = idPelanggan;
+    }
+
+    @Override
+    public void setNama(String nama) {
+        super.setNama(nama);
+    }
+
+    @Override
+    public void setNoHP(String noHP) {
+        super.setNoHP(noHP);
+    }
+    
+    public void setIdPelanggan(String idPelanggan) {
         this.idPelanggan = idPelanggan;
     }
 
@@ -33,8 +47,8 @@ public class Pelanggan extends Orang{
     
     @Override
     public void displayInfo(){
-	System.out.println("Nama	: "+super.getNama());
-	System.out.println("ID	: "+getIdPelanggan());
-	System.out.println("No. HP	: "+super.getNoHP());
+	super.displayInfo();
+	System.out.println("ID      : "+getIdPelanggan());
+	System.out.println("Alamat  : "+getKota());
     }
 }

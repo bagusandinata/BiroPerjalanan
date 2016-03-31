@@ -6,7 +6,7 @@
 
 /**
  *
- * @author dwiki
+ * @author anuge
  */
 public class TempatWisata {
     private String namaTempat;
@@ -19,6 +19,22 @@ public class TempatWisata {
         this.namaDaerah = namaDaerah;
         this.harga = harga;
         this.idWst = idWst;
+    }
+
+    public void setNamaTempat(String namaTempat) {
+        this.namaTempat = namaTempat;
+    }
+
+    public void setNamaDaerah(String namaDaerah) {
+        this.namaDaerah = namaDaerah;
+    }
+
+    public void setIdWst(String idWst) {
+        this.idWst = idWst;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
     }
 
     public String getNamaTempat() {
