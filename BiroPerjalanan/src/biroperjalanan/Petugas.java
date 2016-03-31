@@ -33,7 +33,6 @@ public class Petugas extends Orang {
         return alamat;
     }
     
-    @Override
     public void displayInfo(){
 		System.out.println("Nama	: "+super.getNama());
 		System.out.println("ID	: "+getIdPetugas());
