@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package biroperjalanan;
 
 /**
  *
- * @author IPutuAdi
+ * @author dwiki
  */
 public class Pelanggan extends Orang{
     private String nama;
