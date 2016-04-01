@@ -1,6 +1,4 @@
 
-import java.util.ArrayList;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,29 +10,34 @@ import java.util.ArrayList;
  * @author anuge
  */
 public class Perjalanan {
-    private ArrayList<Pelanggan> pelanggan = new ArrayList<>();
+    private Pelanggan[] pelanggan;
     private PaketWisata paket;
+    private int jmlPlg;
     private double totalHarga;
     private double harga;
+
+    public Perjalanan() {
+        pelanggan = new Pelanggan[100];
+        jmlPlg = 0;
+    }
     
     public void addPelanggan(Pelanggan p){
-        if (pelanggan.size() < 5) pelanggan.add(p);
-        else System.out.println("Penuh");
+        pelanggan[jmlPlg] = p;
+        jmlPlg++;
     }
     
     public Pelanggan getPelangganIndex(int n){
-        return pelanggan.get(n);
+        return pelanggan[n];
     }
     
     public Pelanggan getPelangganId(String idPlg){
-        Pelanggan pg = null;
-	for (Pelanggan p : pelanggan) {
-            if (p.getIdPelanggan() == idPlg) {
-		pg = p;
-		break;
+        int i;
+        for( i=0; i<jmlPlg; i++){
+            if (pelanggan[i].getIdPelanggan() == idPlg){
+                break;
             }
-        }
-        return pg;
+        }            
+        return pelanggan[i];
     }
     
     public void setPaket(PaketWisata p){
@@ -46,10 +49,18 @@ public class Perjalanan {
     }
     
     public void setHarga(double harga){
-        this.harga = harga + paket.getHargaWisata();
+        this.harga = harga;
     }
     
     public double getHarga(){
         return harga;
+    }
+    
+    public double getTotalHarga(String idWst) {
+        return totalHarga = harga + getPaket().getHargaWisata(idWst);
+    }
+    
+    public void display(){
+        System.out.println(pelanggan[0]);
     }
 }

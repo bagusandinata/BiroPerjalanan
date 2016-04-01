@@ -6,7 +6,8 @@
 
 /**
  *
- * @author anuge
+<<<<<<< HEAD
+ * @author giri
  */
 public abstract class Orang {
     private String nama;
@@ -14,14 +15,6 @@ public abstract class Orang {
 
     public Orang(String nama, String noHP) {
         this.nama = nama;
-        this.noHP = noHP;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public void setNoHP(String noHP) {
         this.noHP = noHP;
     }
     
@@ -34,7 +27,16 @@ public abstract class Orang {
     }
     
     public void displayInfo(){
-	System.out.println("Nama	: "+nama);
-	System.out.println("No. HP	: "+noHP);
+	System.out.println("Nama	: "+getNama());
+	System.out.println("No. HP	: "+getNoHP());
+    }
+
+    void setNama(String nama) {
+        this.nama=nama;
+    }
+
+    void setNoHP(String noHP) {
+        this.noHP=noHP;
     }
 }
+

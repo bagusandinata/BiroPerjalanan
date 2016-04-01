@@ -14,7 +14,7 @@ public class Petugas extends Orang {
     private String noHP;
     private String alamat;
 
-    public Petugas(String nama, String idPetugas, String noHP) {
+    public Petugas(String nama, String idPetugas, String noHP, String alamat) {
         super(nama, noHP);
         this.idPetugas = idPetugas;
     }

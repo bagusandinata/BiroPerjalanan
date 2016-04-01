@@ -6,7 +6,7 @@
 
 /**
  *
- * @author anuge
+ * @author dwiki
  */
 public class TempatWisata {
     private String namaTempat;
@@ -19,6 +19,25 @@ public class TempatWisata {
         this.namaDaerah = namaDaerah;
         this.harga = harga;
         this.idWst = idWst;
+    }
+
+    public TempatWisata() {
+    }
+
+    public String getNamaTempat() {
+        return namaTempat;
+    }
+
+    public String getNamaDaerah() {
+        return namaDaerah;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public String getIdWst() {
+        return idWst;
     }
 
     public void setNamaTempat(String namaTempat) {
@@ -36,21 +55,12 @@ public class TempatWisata {
     public void setHarga(double harga) {
         this.harga = harga;
     }
-
-    public String getNamaTempat() {
-        return namaTempat;
-    }
-
-    public String getNamaDaerah() {
-        return namaDaerah;
-    }
-
-    public double getHarga() {
-        return harga;
-    }
-
-    public String getIdWst() {
-        return idWst;
+    
+    public void displayInfo(){
+        System.out.println("ID  : "+getIdWst());
+        System.out.println("Nama Tempat : "+getNamaTempat());
+        System.out.println("Nama Daerah : "+getNamaDaerah());
+        System.out.println("Harga : "+getHarga());
     }
 }
 
