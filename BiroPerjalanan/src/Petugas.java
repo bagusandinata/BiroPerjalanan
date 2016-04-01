@@ -1,5 +1,3 @@
-package biroperjalanan;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +19,20 @@ public class Petugas extends Orang {
         this.idPetugas = idPetugas;
     }
 
+    @Override
+    public void setNama(String nama) {
+        super.setNama(nama);
+    }
+
+    @Override
+    public void setNoHP(String noHP) {
+        super.setNoHP(noHP);
+    }
+
+    public void setIdPetugas(String idPetugas) {
+        this.idPetugas = idPetugas;
+    }
+    
     public void setAlamat(String alamat) {
         this.alamat = alamat;
     }
@@ -32,11 +44,11 @@ public class Petugas extends Orang {
     public String getAlamat() {
         return alamat;
     }
-    
+   
+    @Override
     public void displayInfo(){
-		System.out.println("Nama	: "+super.getNama());
-		System.out.println("ID	: "+getIdPetugas());
-		System.out.println("No. HP	: "+super.getNoHP());
-		System.out.println("Alamat	: "+getAlamat());
-	}
+	super.displayInfo();
+	System.out.println("ID      : "+getIdPetugas());
+	System.out.println("Alamat  : "+getAlamat());
+    }
 }

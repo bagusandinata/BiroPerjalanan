@@ -6,6 +6,7 @@
 
 /**
  *
+<<<<<<< HEAD
  * @author giri
  */
 public abstract class Orang {
@@ -29,4 +30,13 @@ public abstract class Orang {
 	System.out.println("Nama	: "+getNama());
 	System.out.println("No. HP	: "+getNoHP());
     }
+
+    void setNama(String nama) {
+        this.nama=nama;
+    }
+
+    void setNoHP(String noHP) {
+        this.noHP=noHP;
+    }
 }
+
