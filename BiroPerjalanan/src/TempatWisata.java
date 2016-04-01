@@ -21,6 +21,9 @@ public class TempatWisata {
         this.idWst = idWst;
     }
 
+    public TempatWisata() {
+    }
+
     public String getNamaTempat() {
         return namaTempat;
     }
@@ -35,6 +38,22 @@ public class TempatWisata {
 
     public String getIdWst() {
         return idWst;
+    }
+
+    public void setNamaTempat(String namaTempat) {
+        this.namaTempat = namaTempat;
+    }
+
+    public void setNamaDaerah(String namaDaerah) {
+        this.namaDaerah = namaDaerah;
+    }
+
+    public void setIdWst(String idWst) {
+        this.idWst = idWst;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
     }
     
     public void displayInfo(){

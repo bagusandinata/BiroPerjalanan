@@ -19,6 +19,10 @@ public class Pelanggan extends Orang{
         this.idPelanggan = idPelanggan;
     }
 
+    public void setIdPelanggan(String idPelanggan) {
+        this.idPelanggan = idPelanggan;
+    }
+
     public void setKota(String kota) {
         this.kota = kota;
     }
@@ -33,8 +37,10 @@ public class Pelanggan extends Orang{
     
     @Override
     public void displayInfo(){
-	System.out.println("Nama	: "+super.getNama());
+	System.out.println("Nama	: "+ super.getNama());
 	System.out.println("ID	: "+getIdPelanggan());
-	System.out.println("No. HP	: "+super.getNoHP());
+	System.out.println("No. HP	: "+ super.getNoHP());
     }
+
+   
 }
