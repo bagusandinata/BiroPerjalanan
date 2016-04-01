@@ -68,8 +68,7 @@ public class BiroPerjalanan {
                  System.out.println("Kota                : "+p.getPelangganId("C755FA").getKota());
                  System.out.println("No. HP              : "+p.getPelangganId("C755FA").getNoHP());
                  System.out.println("Harga Perjalanan    : "+p.getTotalHarga("A305B"));
-                 break;}
-                 
-                
+                 break;
+            }    
         }
 }
