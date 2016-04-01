@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class PaketWisata {
     private ArrayList<TempatWisata> daftarTujuanWisata = new ArrayList<>();
-    private int jmlWst;
-
+    double harga;
+            
     public void addDaftarTujuanWisata(TempatWisata w) {
         if (daftarTujuanWisata.size() < 5) daftarTujuanWisata.add(w);
         else System.out.println("Penuh");
@@ -35,15 +35,13 @@ public class PaketWisata {
 	return tw;
     }
     
-    public double getHargaWisata(String idWst){
+    public double getHargaWisata(){
         TempatWisata tw = null;
+        harga = 0;
 	for (TempatWisata w : daftarTujuanWisata) {
-            if (w.getIdWst() == idWst) {
-		tw = w;
-		break;
-            }
+            harga = harga + w.getHarga();
 	}
-	return tw.getHarga();
+	return harga;
     }
     
     public void removeTempatWisata(String idWst){
@@ -52,5 +50,15 @@ public class PaketWisata {
                     daftarTujuanWisata.remove(i);
             }
 	}
+    }
+    
+    public void displayInfo(){
+        for (TempatWisata w : daftarTujuanWisata) {
+            System.out.println("ID          : "+w.getIdWst());
+            System.out.println("Nama Tempat : "+w.getNamaTempat());
+            System.out.println("Nama Daerah : "+w.getNamaDaerah());
+            System.out.println("Harga       : "+w.getHarga());
+            break;
+        }
     }
 }

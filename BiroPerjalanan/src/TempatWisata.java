@@ -52,12 +52,5 @@ public class TempatWisata {
     public String getIdWst() {
         return idWst;
     }
-    
-    public void displayInfo(){
-        System.out.println("ID  : "+getIdWst());
-        System.out.println("Nama Tempat : "+getNamaTempat());
-        System.out.println("Nama Daerah : "+getNamaDaerah());
-        System.out.println("Harga : "+getHarga());
-    }
 }
 
