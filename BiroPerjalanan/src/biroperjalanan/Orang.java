@@ -19,6 +19,13 @@ public abstract class Orang {
         this.noHP = noHP;
     }
     
+    public void setNoHP(String noHP){
+        this.noHP = noHP;
+    }
+    
+    public void setNama(String nama){
+        this.nama = nama;
+    }
     public String getNama() {
         return nama;
     }

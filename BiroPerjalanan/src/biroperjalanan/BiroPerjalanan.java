@@ -11,6 +11,7 @@ package biroperjalanan;
  *
  * @author anuge
  */
+import java.lang.*;
 import java.util.Scanner;
 public class BiroPerjalanan {
 
@@ -27,48 +28,85 @@ public class BiroPerjalanan {
         pw.addDaftarTujuanWisata(tw1);
         pw.addDaftarTujuanWisata(tw2);
         
-        Petugas pet1 = new Petugas("Bagus","A201B", "081559955105","perumahan guru");
+        Petugas pet = new Petugas("","","","");
         
-	Pelanggan pel1 = new Pelanggan("Giri","B3685A", "081559955105");
-	pel1.setKota("Surabaya");
+	Pelanggan pel1 = new Pelanggan("","","");
+	pel1.setKota("");
         p.addPelanggan(pel1);
         p.setPaket(pw);
         p.setHarga(50000);
-        
-        
-        Pelanggan pel2 = new Pelanggan("Dwiki","C755FA", "081559955105");
+
+        /*Pelanggan pel2 = new Pelanggan("Dwiki","C755FA", "081559955105");
 	pel2.setKota("Jakarta");
         p.addPelanggan(pel2);
         p.setPaket(pw);
         p.setHarga(70000);
-        
-    
-    
+                 System.out.println("Nama                : "+p.getPelangganId("C755FA").getNama());
+                 System.out.println("ID                  : "+p.getPelangganId("C755FA").getIdPelanggan());
+                 System.out.println("Kota                : "+p.getPelangganId("C755FA").getKota());
+                 System.out.println("No. HP              : "+p.getPelangganId("C755FA").getNoHP());
+                 System.out.println("Harga Perjalanan    : "+p.getTotalHarga("A305B"));*/
+        int x=0;
+        do{
         System.out.println("SISTEM INFORMASI BIRO PERJALANAN");
         System.out.println("===========PILIH MENU===========");
-        System.out.println("1. Display Pelanggan 1");
-        System.out.println("2. Display Pelanggan 2");
-        int x=0;
+        System.out.println("1. Input Data Petugas");
+        System.out.println("2. Input Data Pelanggan");
+        System.out.println("3. Display Petugas");
+        System.out.println("4. Display Pelanggan 1");
+        System.out.println("5. Keluar");
+        
         Scanner scan = new Scanner (System.in);
         System.out.println("Pilih menu ke: ");
         x=scan.nextInt();
         switch(x){
             case 1:
-                System.out.println("Nama                : "+p.getPelangganId("B3685A").getNama());
-                System.out.println("ID                  : "+p.getPelangganId("B3685A").getIdPelanggan());
-                System.out.println("Kota                : "+p.getPelangganId("B3685A").getKota());
-                System.out.println("No. HP              : "+p.getPelangganId("B3685A").getNoHP());
-                System.out.println("Harga Perjalanan    : "+p.getTotalHarga("A304B"));
-                System.out.println();
+                System.out.println("----Input Data Petugas----");
+                System.out.print("Masukkan Nama : ");
+                String nama = scan.next();
+                pet.setNama(nama);
+                System.out.print("Masukkan ID : ");
+                String idPetugas  = scan.next();
+                pet.setIdPetugas(idPetugas);
+                System.out.print("Masukkan No HP : ");
+                String noHP = scan.next();
+                pet.setNoHP(noHP);
+                System.out.print("Masukkan Alamat : "+pet.getAlamat());
+                String alamat = scan.next();
+                pet.setAlamat(alamat);
                 break;
-        
+            
             case 2:
-                 System.out.println("Nama                : "+p.getPelangganId("C755FA").getNama());
-                 System.out.println("ID                  : "+p.getPelangganId("C755FA").getIdPelanggan());
-                 System.out.println("Kota                : "+p.getPelangganId("C755FA").getKota());
-                 System.out.println("No. HP              : "+p.getPelangganId("C755FA").getNoHP());
-                 System.out.println("Harga Perjalanan    : "+p.getTotalHarga("A305B"));
-                 break;
-            }    
+                System.out.println("----Input Data Pelanggan----");
+                
+                System.out.print("Masukkan Nama : ");
+                String name = scan.next();
+                pel1.setNama(name);
+                
+                System.out.print("Masukkan ID : ");
+                String idPelanggan = scan.nextLine();
+                pel1.setIdPelanggan(idPelanggan);
+                
+                System.out.println("Masukkan No HP:  ");
+                String hp = scan.nextLine();
+                pel1.setNoHP(hp);
+                
+                System.out.println("Masukkan kota : ");
+                String kota = scan.nextLine();
+                pel1.setKota(kota);
+                
+                
+                break;
+            case 3:
+                pet.displayInfo();
+                break;
+            case 4:
+                pel1.displayInfo();
+                break;
+            case 5:
+                System.exit(0);
+        
+        }
+        }while (x!=9);
         }
 }

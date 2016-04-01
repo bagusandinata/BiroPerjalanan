@@ -38,4 +38,8 @@ public class Pelanggan extends Orang{
 	System.out.println("ID	: "+getIdPelanggan());
 	System.out.println("No. HP	: "+ super.getNoHP());
     }
+
+    void setIdPelanggan(String idPelanggan) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

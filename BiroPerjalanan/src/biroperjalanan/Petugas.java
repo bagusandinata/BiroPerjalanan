@@ -24,7 +24,11 @@ public class Petugas extends Orang {
     public void setAlamat(String alamat) {
         this.alamat = alamat;
     }
-
+    
+    public void setIdPetugas(String idPetugas){
+        this.idPetugas = idPetugas;
+    }
+    
     public String getIdPetugas() {
         return idPetugas;
     }
