@@ -1,4 +1,11 @@
+package Models;
 
+
+import Models.Perjalanan;
+import Models.Petugas;
+import Models.Pelanggan;
+import Models.PaketWisata;
+import Models.TempatWisata;
 import java.util.ArrayList;
 import java.util.Scanner;
 
