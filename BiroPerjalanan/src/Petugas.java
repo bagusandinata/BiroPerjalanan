@@ -14,11 +14,11 @@ public class Petugas extends Orang {
     private String noHP;
     private String alamat;
 
-    public Petugas(String nama, String idPetugas, String noHP, String alamat) {
+    public Petugas(String nama, String idPetugas, String noHP) {
         super(nama, noHP);
         this.idPetugas = idPetugas;
     }
-
+    
     @Override
     public void setNama(String nama) {
         super.setNama(nama);

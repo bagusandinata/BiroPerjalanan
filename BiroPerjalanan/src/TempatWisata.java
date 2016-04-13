@@ -6,7 +6,7 @@
 
 /**
  *
- * @author dwiki
+ * @author anuge
  */
 public class TempatWisata {
     private String namaTempat;
@@ -14,14 +14,26 @@ public class TempatWisata {
     private String idWst;
     private double harga;
     
-    public TempatWisata(String namaTempat, String namaDaerah, double harga, String idWst) {
+    public TempatWisata(String namaTempat, String namaDaerah, String idWst) {
         this.namaTempat = namaTempat;
         this.namaDaerah = namaDaerah;
-        this.harga = harga;
         this.idWst = idWst;
     }
 
-    public TempatWisata() {
+    public void setNamaTempat(String namaTempat) {
+        this.namaTempat = namaTempat;
+    }
+
+    public void setNamaDaerah(String namaDaerah) {
+        this.namaDaerah = namaDaerah;
+    }
+
+    public void setIdWst(String idWst) {
+        this.idWst = idWst;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
     }
 
     public String getNamaTempat() {
@@ -40,27 +52,11 @@ public class TempatWisata {
         return idWst;
     }
 
-    public void setNamaTempat(String namaTempat) {
-        this.namaTempat = namaTempat;
-    }
-
-    public void setNamaDaerah(String namaDaerah) {
-        this.namaDaerah = namaDaerah;
-    }
-
-    public void setIdWst(String idWst) {
-        this.idWst = idWst;
-    }
-
-    public void setHarga(double harga) {
-        this.harga = harga;
-    }
-    
-    public void displayInfo(){
-        System.out.println("ID  : "+getIdWst());
-        System.out.println("Nama Tempat : "+getNamaTempat());
-        System.out.println("Nama Daerah : "+getNamaDaerah());
-        System.out.println("Harga : "+getHarga());
+    void displayInfo() {
+        System.out.println("ID Wisata   :  "+idWst);
+        System.out.println("Nama Tempat :  "+namaTempat);
+        System.out.println("Nama Daerah :  "+namaDaerah);
+        System.out.println("Harga       :  "+harga);
     }
 }
 
