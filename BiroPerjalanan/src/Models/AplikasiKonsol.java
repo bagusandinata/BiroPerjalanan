@@ -1,25 +1,10 @@
 package Models;
 
 
-import Models.Perjalanan;
-import Models.Petugas;
-import Models.Pelanggan;
-import Models.PaketWisata;
-import Models.TempatWisata;
+import Config.Database;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author anuge
- */
-import java.util.Scanner;
 public class AplikasiKonsol {
     private ArrayList <Petugas> daftarPetugas = new ArrayList<>();
     private ArrayList <Pelanggan> daftarPelanggan = new ArrayList<>();
@@ -27,7 +12,9 @@ public class AplikasiKonsol {
     private ArrayList <PaketWisata> daftarPaketWisata = new ArrayList<>();
     private ArrayList <TempatWisata> daftarTempatWisata = new ArrayList<>();
     
-    public void addPetugas(Petugas pet){
+    Database db = new Database();
+    
+/*    public void addPetugas(Petugas pet){
         if (daftarPetugas.size() < 3) daftarPetugas.add(pet);
         else System.out.println("Penuh");
     }
@@ -100,7 +87,7 @@ public class AplikasiKonsol {
 	}
         System.out.println("ID tidak ditemukan");
     }
-    
+/*    
     public void mainPetugas() {
         int x=0;
         do{
@@ -251,7 +238,7 @@ public class AplikasiKonsol {
         }while (x!=5);
     }
     
-/*    public void mainPaketWisata() {
+    public void mainPaketWisata() {
         int x=0;
         do{
             System.out.println("SISTEM INFORMASI BIRO PERJALANAN");
@@ -269,9 +256,9 @@ public class AplikasiKonsol {
                 case 1:
                     System.out.println("----Input Data Paket Wisata----");
                     System.out.print("Masukkan ID : ");
-                    String id = scan.next();
-                    System.out.print("Masukkan ID : ");
-                    String idPelanggan  = scan.next();
+                    String idPelanggan = scan.next();
+                    System.out.print("Masukkan nama : ");
+                    String nama  = scan.next();
                     System.out.print("Masukkan No HP : ");
                     String noHP = scan.next();
                     Pelanggan pel = new Pelanggan(nama, idPelanggan, noHP);
@@ -300,7 +287,7 @@ public class AplikasiKonsol {
             }
         }while (x!=5);
     }
-*/    
+    
     public static void main(String[] args){
         AplikasiKonsol ak = new AplikasiKonsol();
         
@@ -334,4 +321,5 @@ public class AplikasiKonsol {
         }
         }while (x!=9);
     }
+*/
 }

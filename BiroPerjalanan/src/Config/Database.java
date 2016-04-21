@@ -34,13 +34,46 @@ public class Database {
         }
 
     }
-//save
-    public void savePelanggan(Pelanggan p) {
+    public void disconnect()
+    {
+        try {
+            st.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public boolean manipulasiData(String query)throws SQLException{
+        try {
+            if (st.executeUpdate(query) > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+     public ResultSet getData(String query)
+    {
+        try {
+            return st.executeQuery(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+       public void savePetugas(Petugas p) {
 
         try {
 
-            String query = "INSERT INTO `tbpelanggan`(`idpelanggan`,`namapelanggan`,`nohppelanggan`) VALUES ("
-                    + "'" + p.getIdPelanggan()+ "',"
+            String query = "INSERT INTO pelanggan(namapetugas, alamatpetugas) VALUES ("
+                    + "'" + p.getIdPetugas()+ "',"
                     + "'" + p.getNama()+ "',"
                     + "'" + p.getNoHP()+"')";
             st.execute(query, Statement.RETURN_GENERATED_KEYS);
@@ -48,20 +81,6 @@ public class Database {
             ex.printStackTrace();
         }
     }
-        public void savePetugas(Petugas pet) {
-
-        try {
-
-            String query = "INSERT INTO `tbpetugas`(`idpelanggan`,`nama`,`nohp`) VALUES ("
-                    + "'" + pet.getIdPetugas()+ "',"
-                    + "'" + pet.getNama()+ "',"
-                    + "'" + pet.getNoHP()+"')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public Pelanggan getPelanggan(String Pelanggan) {
         Pelanggan p = null;
         try {
@@ -104,15 +123,7 @@ public class Database {
         return listId.toArray(new String[0]);
     }
     
-    public void disconnect()
-    {
-        try {
-            st.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    
     
     
 }
