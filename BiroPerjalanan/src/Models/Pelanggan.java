@@ -39,10 +39,12 @@ public class Pelanggan extends Orang{
     
     @Override
     public void displayInfo(){
-	System.out.println("Nama	: "+ super.getNama());
 	System.out.println("ID	: "+getIdPelanggan());
+        System.out.println("Nama	: "+ super.getNama());
 	System.out.println("No. HP	: "+ super.getNoHP());
     }
+
+   
 
    
 }
