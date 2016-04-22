@@ -1,3 +1,5 @@
+package Models;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,10 +39,12 @@ public class Pelanggan extends Orang{
     
     @Override
     public void displayInfo(){
-	System.out.println("Nama	: "+ super.getNama());
 	System.out.println("ID	: "+getIdPelanggan());
+        System.out.println("Nama	: "+ super.getNama());
 	System.out.println("No. HP	: "+ super.getNoHP());
     }
+
+   
 
    
 }

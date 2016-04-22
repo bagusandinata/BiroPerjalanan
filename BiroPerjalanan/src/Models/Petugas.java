@@ -1,3 +1,5 @@
+package Models;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,16 +11,20 @@
  * @author anuge
  */
 public class Petugas extends Orang {
-    private String nama;
     private String idPetugas;
-    private String noHP;
     private String alamat;
 
-    public Petugas(String nama, String idPetugas, String noHP, String alamat) {
+    public Petugas(String idPetugas, String nama,String alamat, String noHP) {
         super(nama, noHP);
         this.idPetugas = idPetugas;
+        this.alamat = alamat;
     }
 
+    public Petugas(String nama, String alamat, String noHP) {
+     super(nama,noHP);
+     this.alamat = alamat;
+    }
+    
     @Override
     public void setNama(String nama) {
         super.setNama(nama);

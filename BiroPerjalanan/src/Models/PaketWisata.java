@@ -1,3 +1,5 @@
+package Models;
+
 
 import java.util.ArrayList;
 
@@ -13,8 +15,17 @@ import java.util.ArrayList;
  */
 public class PaketWisata {
     private ArrayList<TempatWisata> daftarTujuanWisata = new ArrayList<>();
-    double harga;
-            
+    private double harga;
+    private String idPaketWisata;
+
+    public String getIdPaketWisata() {
+        return idPaketWisata;
+    }
+
+    public void setIdPaketWisata(String idPaketWisata) {
+        this.idPaketWisata = idPaketWisata;
+    }
+    
     public void addDaftarTujuanWisata(TempatWisata w) {
         if (daftarTujuanWisata.size() < 5) daftarTujuanWisata.add(w);
         else System.out.println("Penuh");
@@ -60,9 +71,5 @@ public class PaketWisata {
             System.out.println("Harga       : "+w.getHarga());
             break;
         }
-    }
-
-    double getHargaWisata(String idWst) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

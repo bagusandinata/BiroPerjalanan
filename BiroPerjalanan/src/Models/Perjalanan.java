@@ -1,3 +1,7 @@
+package Models;
+
+
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,34 +14,38 @@
  * @author anuge
  */
 public class Perjalanan {
-    private Pelanggan[] pelanggan;
+    private ArrayList<Pelanggan> pelanggan = new ArrayList<>();
     private PaketWisata paket;
-    private int jmlPlg;
     private double totalHarga;
     private double harga;
+    private String idPerjalanan;
 
-    public Perjalanan() {
-        pelanggan = new Pelanggan[100];
-        jmlPlg = 0;
+    public String getIdPerjalanan() {
+        return idPerjalanan;
+    }
+
+    public void setIdPerjalanan(String idPer) {
+        this.idPerjalanan = idPerjalanan;
     }
     
     public void addPelanggan(Pelanggan p){
-        pelanggan[jmlPlg] = p;
-        jmlPlg++;
+        if (pelanggan.size() < 5) pelanggan.add(p);
+        else System.out.println("Penuh");
     }
     
     public Pelanggan getPelangganIndex(int n){
-        return pelanggan[n];
+        return pelanggan.get(n);
     }
     
     public Pelanggan getPelangganId(String idPlg){
-        int i;
-        for( i=0; i<jmlPlg; i++){
-            if (pelanggan[i].getIdPelanggan() == idPlg){
-                break;
+        Pelanggan pg = null;
+	for (Pelanggan p : pelanggan) {
+            if (p.getIdPelanggan() == idPlg) {
+		pg = p;
+		break;
             }
-        }            
-        return pelanggan[i];
+        }
+        return pg;
     }
     
     public void setPaket(PaketWisata p){
@@ -49,18 +57,10 @@ public class Perjalanan {
     }
     
     public void setHarga(double harga){
-        this.harga = harga;
+        this.harga = harga + paket.getHargaWisata();
     }
     
     public double getHarga(){
         return harga;
-    }
-    
-    public double getTotalHarga(String idWst) {
-        return totalHarga = harga + getPaket().getHargaWisata(idWst);
-    }
-    
-    public void display(){
-        System.out.println(pelanggan[0]);
     }
 }
