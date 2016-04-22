@@ -5,6 +5,10 @@
  */
 package View;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author IPutuAdi
@@ -16,6 +20,46 @@ public class InputPelanggan extends javax.swing.JFrame {
      */
     public InputPelanggan() {
         initComponents();
+    }
+
+    public JButton getBtnAdd() {
+        return btnAdd;
+    }
+
+    public void setBtnAdd(JButton btnAdd) {
+        this.btnAdd = btnAdd;
+    }
+
+    public JTable getTbPelanggan() {
+        return tbPelanggan;
+    }
+
+    public void setTbPelanggan(JTable tbPelanggan) {
+        this.tbPelanggan = tbPelanggan;
+    }
+
+    public JTextField getTfIdPelanggan() {
+        return tfIdPelanggan;
+    }
+
+    public void setTfIdPelanggan(JTextField tfIdPelanggan) {
+        this.tfIdPelanggan = tfIdPelanggan;
+    }
+
+    public JTextField getTfNamaPelanggan() {
+        return tfNamaPelanggan;
+    }
+
+    public void setTfNamaPelanggan(JTextField tfNamaPelanggan) {
+        this.tfNamaPelanggan = tfNamaPelanggan;
+    }
+
+    public JTextField getTfNoHpPelanggan() {
+        return tfNoHpPelanggan;
+    }
+
+    public void setTfNoHpPelanggan(JTextField tfNoHpPelanggan) {
+        this.tfNoHpPelanggan = tfNoHpPelanggan;
     }
 
     /**
@@ -34,13 +78,10 @@ public class InputPelanggan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tfIdPelanggan = new javax.swing.JTextField();
         tfNamaPelanggan = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        tfNoHpPelanggan = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        view = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbPelanggan = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,7 +95,18 @@ public class InputPelanggan extends javax.swing.JFrame {
 
         btnAdd.setText("Simpan");
 
-        btnView.setText("View");
+        tbPelanggan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tbPelanggan);
 
         javax.swing.GroupLayout inputLayout = new javax.swing.GroupLayout(input);
         input.setLayout(inputLayout);
@@ -63,10 +115,7 @@ public class InputPelanggan extends javax.swing.JFrame {
             .addGroup(inputLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(inputLayout.createSequentialGroup()
-                        .addComponent(btnView)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdd))
+                    .addComponent(btnAdd)
                     .addGroup(inputLayout.createSequentialGroup()
                         .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -76,8 +125,11 @@ public class InputPelanggan extends javax.swing.JFrame {
                         .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfIdPelanggan, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addComponent(tfNamaPelanggan)
-                            .addComponent(jTextField3))))
-                .addContainerGap(51, Short.MAX_VALUE))
+                            .addComponent(tfNoHpPelanggan))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(inputLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE))
         );
         inputLayout.setVerticalGroup(
             inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,71 +145,31 @@ public class InputPelanggan extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNoHpPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnView))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(btnAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panelDasar.add(input, "card2");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton3.setText("Back");
-
-        javax.swing.GroupLayout viewLayout = new javax.swing.GroupLayout(view);
-        view.setLayout(viewLayout);
-        viewLayout.setHorizontalGroup(
-            viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewLayout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addContainerGap())
-            .addGroup(viewLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        viewLayout.setVerticalGroup(
-            viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(69, 69, 69))
-        );
-
-        panelDasar.add(view, "card3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 40, Short.MAX_VALUE)
                 .addComponent(panelDasar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(panelDasar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,18 +178,15 @@ public class InputPelanggan extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnView;
     private javax.swing.JPanel input;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelDasar;
+    private javax.swing.JTable tbPelanggan;
     private javax.swing.JTextField tfIdPelanggan;
     private javax.swing.JTextField tfNamaPelanggan;
-    private javax.swing.JPanel view;
+    private javax.swing.JTextField tfNoHpPelanggan;
     // End of variables declaration//GEN-END:variables
 }

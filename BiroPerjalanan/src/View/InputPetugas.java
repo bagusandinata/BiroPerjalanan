@@ -228,7 +228,6 @@ public class InputPetugas extends javax.swing.JFrame {
         return tfIdPetugas.getText();
     }
 
-
     public String getNoHPPetugas() {
         return tfNoHPPetugas.getText();
     }
