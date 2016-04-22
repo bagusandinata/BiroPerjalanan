@@ -19,6 +19,11 @@ public class Petugas extends Orang {
         this.idPetugas = idPetugas;
         this.alamat = alamat;
     }
+
+    public Petugas(String nama, String alamat, String noHP) {
+     super(nama,noHP);
+     this.alamat = alamat;
+    }
     
     @Override
     public void setNama(String nama) {

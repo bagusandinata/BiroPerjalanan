@@ -24,6 +24,7 @@ public class Controller extends MouseAdapter implements ActionListener {
     public InputPetugas petugas;
     public InputPelanggan pelanggan;
     public Petugas pet;
+    private int selected;
 
     public Controller() throws SQLException {
         app = new AplikasiKonsol();
@@ -34,6 +35,19 @@ public class Controller extends MouseAdapter implements ActionListener {
         petugas.addListener(this);
         petugas.setVisible(true);
         petugas.viewAll(db.loadAllPetugas());
+    }
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        Object o = me.getSource();
+        if (o.equals(petugas.getTbPetugas())) {
+            try {
+                selected = petugas.getTbPetugas().getSelectedRow();
+                Petugas p = db.loadAllPetugas().get(selected);
+                petugas.view(p);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     /**
      *
@@ -53,7 +67,15 @@ public class Controller extends MouseAdapter implements ActionListener {
                 } catch (SQLException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                            }
+            }else if(src.equals(petugas.getBtnEdit())){
+                Petugas p = new Petugas(petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
+                try {
+                    db.updatePetugas(p);
+                    petugas.viewAll(db.loadAllPetugas());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         //save
         
         //Index

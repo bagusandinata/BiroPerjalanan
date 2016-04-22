@@ -185,7 +185,7 @@ public class InputPetugas extends javax.swing.JFrame {
         return btnAdd;
     }
 
-    public JButton getBtnBack() {
+    public JButton getBtnEdit() {
         return btnEdit;
     }
 
@@ -193,6 +193,10 @@ public class InputPetugas extends javax.swing.JFrame {
         tfIdPetugas.setText(s);
     }
 
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }   
+    
     public void setNoHPPetugas(String s) {
         tfNoHPPetugas.setText(s);
     }
@@ -259,6 +263,14 @@ public class InputPetugas extends javax.swing.JFrame {
 
     public JTable getTbPetugas() {
         return tbPetugas;
+    }
+    public void view (Petugas p) {
+        tfIdPetugas.setText(p.getIdPetugas());
+        txtNmPetugas.setText(p.getNama());
+        tfAlamatPetugas.setText(p.getAlamat());
+        tfNoHPPetugas.setText(p.getNoHP());
+        btnAdd.setVisible(false);
+        btnEdit.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

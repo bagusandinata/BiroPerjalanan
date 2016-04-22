@@ -6,13 +6,14 @@
 package Models;
 
 import Controller.Controller;
+import java.sql.SQLException;
 
 /**
  *
  * @author IPutuAdi
  */
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new Controller();
     }
 }
