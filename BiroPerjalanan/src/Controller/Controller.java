@@ -161,10 +161,4 @@ public class Controller extends MouseAdapter implements ActionListener {
     }
 
 
-    
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
