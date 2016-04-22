@@ -5,11 +5,17 @@
  */
 package View;
 
+import Models.Petugas;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import javafx.concurrent.Task;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -43,12 +49,11 @@ public class InputPetugas extends javax.swing.JFrame {
         tfAlamatPetugas = new javax.swing.JTextField();
         tfNoHPPetugas = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         txtNmPetugas = new javax.swing.JTextField();
-        view = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnkembali = new javax.swing.JButton();
+        tbPetugas = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,67 +69,14 @@ public class InputPetugas extends javax.swing.JFrame {
 
         btnAdd.setText("Simpan");
 
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout inputLayout = new javax.swing.GroupLayout(input);
-        input.setLayout(inputLayout);
-        inputLayout.setHorizontalGroup(
-            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(inputLayout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdd))
-                    .addGroup(inputLayout.createSequentialGroup()
-                        .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfIdPetugas)
-                            .addComponent(tfAlamatPetugas)
-                            .addComponent(tfNoHPPetugas, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(txtNmPetugas))))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        inputLayout.setVerticalGroup(
-            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(tfIdPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNmPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfAlamatPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfNoHPPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnBack))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-
-        panelDasar.add(input, "card2");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbPetugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -135,51 +87,89 @@ public class InputPetugas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbPetugas);
 
-        btnkembali.setText("back");
+        btnDelete.setText("Delete");
 
-        javax.swing.GroupLayout viewLayout = new javax.swing.GroupLayout(view);
-        view.setLayout(viewLayout);
-        viewLayout.setHorizontalGroup(
-            viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout inputLayout = new javax.swing.GroupLayout(input);
+        input.setLayout(inputLayout);
+        inputLayout.setHorizontalGroup(
+            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inputLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfIdPetugas)
+                    .addComponent(tfAlamatPetugas)
+                    .addComponent(tfNoHPPetugas, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(txtNmPetugas))
+                .addGap(18, 18, 18)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit)
+                    .addComponent(btnAdd))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnkembali)
-                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        viewLayout.setVerticalGroup(
-            viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewLayout.createSequentialGroup()
+        inputLayout.setVerticalGroup(
+            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inputLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfIdPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelete)))
+                .addGap(18, 18, 18)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNmPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit))
+                .addGap(18, 18, 18)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfAlamatPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd))
+                .addGap(18, 18, 18)
+                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfNoHPPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(btnkembali)
-                .addGap(51, 51, 51))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
-        panelDasar.add(view, "card3");
+        panelDasar.add(input, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDasar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelDasar, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDasar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelDasar, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     public JTextField getTxtNmPetugas() {
         return txtNmPetugas;
@@ -196,7 +186,7 @@ public class InputPetugas extends javax.swing.JFrame {
     }
 
     public JButton getBtnBack() {
-        return btnBack;
+        return btnEdit;
     }
 
     public void setIdPetugas(String s) {
@@ -244,29 +234,49 @@ public class InputPetugas extends javax.swing.JFrame {
     }
  public void addListener(ActionListener e){
         btnAdd.addActionListener(e);
-        btnBack.addActionListener(e);
+        btnEdit.addActionListener(e);
     }
 
+    public void addAdapter(MouseAdapter e) {
+        tbPetugas.addMouseListener(e);
+    }
+ 
+    public void viewAll(ArrayList<Petugas> list) {
+        String[] title = {"Id Petugas","Nama Petugas","Alamat Petugas","No HP Petugas"};
+        String[][] data = new String[list.size()][4];
+        for (int i = 0; i < list.size(); i++) {
+            Petugas p = list.get(i);
+            data[i][0] = p.getIdPetugas();
+            data[i][1] = p.getNama();
+            data[i][2] = p.getAlamat();
+            data[i][3] = p.getNoHP();
+        }
+        tbPetugas.setModel(new DefaultTableModel(data,title));
+    }
+    
     public void showMessage(Component  c, String s){
         JOptionPane.showMessageDialog(c, s);
     }
 
+    public JTable getTbPetugas() {
+        return tbPetugas;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnkembali;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JPanel input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelDasar;
+    private javax.swing.JTable tbPetugas;
     private javax.swing.JTextField tfAlamatPetugas;
     private javax.swing.JTextField tfIdPetugas;
     private javax.swing.JTextField tfNoHPPetugas;
     private javax.swing.JTextField txtNmPetugas;
-    private javax.swing.JPanel view;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller extends MouseAdapter implements ActionListener {
 
@@ -22,11 +25,15 @@ public class Controller extends MouseAdapter implements ActionListener {
     public InputPelanggan pelanggan;
     public Petugas pet;
 
-    public Controller() {
-        this.app = app;
-        this.db = db;
-        this.petugas = petugas;
+    public Controller() throws SQLException {
+        app = new AplikasiKonsol();
+        db = new Database();
         db.connect();
+        petugas = new InputPetugas();
+        petugas.addAdapter(this);
+        petugas.addListener(this);
+        petugas.setVisible(true);
+        petugas.viewAll(db.loadAllPetugas());
     }
     /**
      *
@@ -39,10 +46,14 @@ public class Controller extends MouseAdapter implements ActionListener {
         Object src = e.getSource();
         //add Petugas
             if (src.equals(petugas.getBtnAdd())){
-                db.connect();
-                db.savePetugas(pet);
-                petugas.getBtnAdd();
-            }
+                Petugas p = new Petugas(petugas.getIdPetugas(),petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
+                try {
+                    db.savePetugas(p);
+                    petugas.viewAll(db.loadAllPetugas());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                            }
         //save
         
         //Index

@@ -11,14 +11,13 @@ package Models;
  * @author anuge
  */
 public class Petugas extends Orang {
-    private String nama;
     private String idPetugas;
-    private String noHP;
     private String alamat;
 
-    public Petugas(String nama, String idPetugas, String noHP) {
+    public Petugas(String nama, String idPetugas,String alamat, String noHP) {
         super(nama, noHP);
         this.idPetugas = idPetugas;
+        this.alamat = alamat;
     }
     
     @Override

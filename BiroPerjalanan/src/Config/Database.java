@@ -67,62 +67,110 @@ public class Database {
             return null;
         }
     }
-    
-       public void savePetugas(Petugas p) {
-
-        try {
-
-            String query = "INSERT INTO pelanggan(namapetugas, alamatpetugas) VALUES ("
-                    + "'" + p.getIdPetugas()+ "',"
-                    + "'" + p.getNama()+ "',"
-                    + "'" + p.getNoHP()+"')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    public Pelanggan getPelanggan(String Pelanggan) {
-        Pelanggan p = null;
-        try {
-            String query = "SELECT * FROM `pelanggan` WHERE `idPelanggan` = " + p.getIdPelanggan();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                p = new Pelanggan(rs.getString(1), rs.getString(2), rs.getString(3));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return p;
-    }
-
-    public void updatePelanggan(Pelanggan p) {
-        try {
-            String query = "update pelanggan set nama ='"
-                    + p.getNama() + "', No HP= '"
-                    + p.getNoHP()+ "' where idPelanggan = "
-                    + p.getIdPelanggan();
-            st.executeUpdate(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public String[] getListIDPelanggan() {
-        ArrayList<String> listId = new ArrayList<>();
-        try {
-            //Query?
-            String query = "SELECT idPelanggan FROM `pelanggan`";
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                listId.add(rs.getString(1));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return listId.toArray(new String[0]);
+    public void savePelanggan(Pelanggan pelanggan) throws SQLException {
+        String query = "insert into tbpelanggan(idpelanggan, namapelanggan, nohppelanggan) values('"+pelanggan.getIdPelanggan()+"','"+pelanggan.getNama()+"','"+pelanggan.getNoHP()+"')";
+        st.execute(query);
     }
     
+    public ArrayList<Pelanggan> loadAllPelanggan() throws SQLException {
+        ArrayList<Pelanggan> listPelanggan = new ArrayList<>();
+        String query = "select * from tbpelanggan";
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {
+            Pelanggan pel = new Pelanggan(rs.getString(1),rs.getString(2),rs.getString(3));
+            listPelanggan.add(pel);
+        }
+        return listPelanggan;
+    }
+    
+    public void updatePelanggan(Pelanggan pelanggan) throws SQLException {
+        String query = "update tbpelanggan set namapelanggan = '"+pelanggan.getNama()+"', nohppelanggan = '"+pelanggan.getNoHP()+"' where idpelanggan = "+pelanggan.getIdPelanggan();
+        st.executeUpdate(query);
+    }
+    public void deletePelanggan(Pelanggan pelanggan) throws SQLException{
+        String query = "delete from tbpelanggan where idpelanggan ='"+pelanggan.getIdPelanggan()+"'";
+        st.execute(query);
+    }
+    public void savePetugas(Petugas petugas) throws SQLException {
+        String query = "insert into tbpetugas(idpetugas, namapetugas, alamatpetugas, nohppetugas) values('"+petugas.getIdPetugas()+"','"+petugas.getNama()+"','"+petugas.getAlamat()+"','"+petugas.getNoHP()+"')";
+        st.execute(query);
+    }
+    
+    public ArrayList<Petugas> loadAllPetugas() throws SQLException {
+        ArrayList<Petugas> listPetugas = new ArrayList<>();
+        String query = "select * from tbpetugas";
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {
+            Petugas pet = new Petugas(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4));
+            listPetugas.add(pet);
+        }
+        return listPetugas;
+    }
+    
+    public void updatePetugas(Petugas petugas) throws SQLException {
+        String query = "update tbpetugas set namapetugas= '"+petugas.getNama()+"', nohppetugas= '"+petugas.getNoHP()+"' where idpetugas = "+petugas.getIdPetugas();
+        st.executeUpdate(query);
+    }
+    public void deletePetugas(Petugas petugas) throws SQLException{
+        String query = "delete from tbpetugas where idpetugas='"+petugas.getIdPetugas()+"'";
+        st.execute(query);
+    }
+    
+//       public void savePetugas(Petugas p) {
+//
+//        try {
+//
+//            String query = "INSERT INTO pelanggan(idpetugas, namapetugas, nohppetugas) VALUES ("
+//                    + "'" + p.getIdPetugas()+ "',"
+//                    + "'" + p.getNama()+ "',"
+//                    + "'" + p.getNoHP()+"')";
+//            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//    public Pelanggan getPelanggan(String Pelanggan) {
+//        Pelanggan p = null;
+//        try {
+//            String query = "SELECT * FROM `pelanggan` WHERE `idPelanggan` = " + p.getIdPelanggan();
+//            ResultSet rs = st.executeQuery(query);
+//            while (rs.next()) {
+//                p = new Pelanggan(rs.getString(1), rs.getString(2), rs.getString(3));
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return p;
+//    }
+//
+//    public void updatePelanggan(Pelanggan p) {
+//        try {
+//            String query = "update pelanggan set nama ='"
+//                    + p.getNama() + "', No HP= '"
+//                    + p.getNoHP()+ "' where idPelanggan = "
+//                    + p.getIdPelanggan();
+//            st.executeUpdate(query);
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    public String[] getListIDPelanggan() {
+//        ArrayList<String> listId = new ArrayList<>();
+//        try {
+//            //Query?
+//            String query = "SELECT idPelanggan FROM `pelanggan`";
+//            ResultSet rs = st.executeQuery(query);
+//            while (rs.next()) {
+//                listId.add(rs.getString(1));
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return listId.toArray(new String[0]);
+//    }
+//    
     
     
     
