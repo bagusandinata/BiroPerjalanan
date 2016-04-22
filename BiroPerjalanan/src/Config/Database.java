@@ -108,7 +108,7 @@ public class Database {
     }
     
     public void updatePetugas(Petugas petugas) throws SQLException {
-        String query = "update tbpetugas set namapetugas= '"+petugas.getNama()+"', nohppetugas= '"+petugas.getNoHP()+"' where idpetugas = "+petugas.getIdPetugas();
+        String query = "update tbpetugas set namapetugas= '"+petugas.getNama()+"',alamatpetugas='"+petugas.getAlamat()+"',nohppetugas='"+petugas.getNoHP()+"' where idpetugas = '"+petugas.getIdPetugas()+"'";
         st.executeUpdate(query);
     }
     public void deletePetugas(Petugas petugas) throws SQLException{

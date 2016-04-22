@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.util.Date;
 import javafx.concurrent.Task;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -271,6 +272,14 @@ public class InputPetugas extends javax.swing.JFrame {
         tfNoHPPetugas.setText(p.getNoHP());
         btnAdd.setVisible(false);
         btnEdit.setVisible(true);
+    }
+    public void reset() {
+        tfIdPetugas.setText("");
+        txtNmPetugas.setText("");
+        tfAlamatPetugas.setText("");
+        tfNoHPPetugas.setText("");
+        btnAdd.setVisible(true);
+        btnEdit.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -41,16 +41,16 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="btnPetugas" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="btnPaketWisata" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton3" max="32767" attributes="0"/>
-                      <Component id="jButton5" max="32767" attributes="0"/>
+                      <Component id="btnPerjalanan" max="32767" attributes="0"/>
+                      <Component id="btnTempatWisata" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="34" max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="103" max="-2" attributes="0"/>
+                  <Component id="btnPelanggan" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -60,14 +60,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" pref="88" max="32767" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="btnPerjalanan" alignment="3" pref="88" max="32767" attributes="0"/>
+                      <Component id="btnPelanggan" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="btnPetugas" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton4" pref="85" max="32767" attributes="0"/>
-                      <Component id="jButton5" max="32767" attributes="0"/>
+                      <Component id="btnPaketWisata" pref="85" max="32767" attributes="0"/>
+                      <Component id="btnTempatWisata" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="71" max="32767" attributes="0"/>
               </Group>
@@ -75,27 +75,27 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnPetugas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Petugas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnPelanggan">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pelanggan"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnPerjalanan">
           <Properties>
             <Property name="text" type="java.lang.String" value="Perjalanan"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnPaketWisata">
           <Properties>
             <Property name="text" type="java.lang.String" value="Paket Wisata"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnTempatWisata">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tempat Wisata"/>
           </Properties>
