@@ -20,6 +20,10 @@ public class Perjalanan {
     private double harga;
     private String idPerjalanan;
 
+    public Perjalanan(double aDouble, double aDouble0, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getIdPerjalanan() {
         return idPerjalanan;
     }
@@ -63,4 +67,13 @@ public class Perjalanan {
     public double getHarga(){
         return harga;
     }
+
+    public double getTotalHarga() {
+        return totalHarga;
+    }
+
+    public void setTotalHarga(double totalHarga) {
+        this.totalHarga = totalHarga;
+    }
+    
 }

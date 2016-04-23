@@ -6,6 +6,7 @@
 package Config;
 
 import Models.Pelanggan;
+import Models.Perjalanan;
 import Models.Petugas;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,6 +24,7 @@ public class Database {
     private String server = "jdbc:mysql://localhost:3306/db_tubes", dbuser = "root", dbpass = "";
     private Statement st;
     private Connection con;
+    private Perjalanan perl;
 
     public void connect() {
         try {
@@ -113,6 +115,31 @@ public class Database {
     }
     public void deletePetugas(Petugas petugas) throws SQLException{
         String query = "delete from tbpetugas where idpetugas='"+petugas.getIdPetugas()+"'";
+        st.execute(query);
+    }
+    
+    public void savePerjalanan(Perjalanan perjalanan) throws SQLException {
+        String query = "insert into tbperjalanan(harga, idPerjalanan, totalHarga) values('"+perjalanan.getHarga()+"','"+perjalanan.getIdPerjalanan()+"','"+perjalanan.getTotalHarga()+"')";
+        st.execute(query);
+    }
+    
+    public ArrayList<Perjalanan> loadAllPerjalanan() throws SQLException {
+        ArrayList<Perjalanan> listPerjalanan = new ArrayList<>();
+        String query = "select * from tbperjalanan";
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next()) {
+            Perjalanan per1 = new Perjalanan (rs.getDouble(1),rs.getDouble(2),rs.getString(3));
+            listPerjalanan.add(perl);
+        }
+        return listPerjalanan;
+    }
+    
+    public void updatePerjalanan(Perjalanan perjalanan) throws SQLException {
+        String query = "update tbperjalanan set harga = '"+perjalanan.getHarga()+"',  = '"+perjalanan.getTotalHarga()+"' where idPerjalanan = "+perjalanan.getIdPerjalanan();
+        st.executeUpdate(query);
+    }
+    public void deletePerjalanan(Perjalanan perjalanan) throws SQLException{
+        String query = "delete from tbpelanggan where idPerjalanan ='"+perjalanan.getIdPerjalanan()+"'";
         st.execute(query);
     }
     
