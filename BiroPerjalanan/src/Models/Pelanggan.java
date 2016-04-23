@@ -16,7 +16,7 @@ public class Pelanggan extends Orang{
     private String noHP;
     private String kota;
     
-    public Pelanggan(String nama, String idPelanggan, String noHP) {
+    public Pelanggan(String idPelanggan, String nama, String noHP) {
         super(nama, noHP);
         this.idPelanggan = idPelanggan;
     }

@@ -6,6 +6,7 @@
 package Controller;
 import Config.Database;
 import Models.AplikasiKonsol;
+import Models.Pelanggan;
 import Models.Petugas;
 import View.InputPelanggan;
 import View.InputPetugas;
@@ -34,6 +35,7 @@ public class Controller extends MouseAdapter implements ActionListener {
         db = new Database();
         db.connect();
         petugas = new InputPetugas();
+        pelanggan = new InputPelanggan();
         petugas.addAdapter(this);
         petugas.addListener(this);
         petugas.viewAll(db.loadAllPetugas());
@@ -66,29 +68,34 @@ public class Controller extends MouseAdapter implements ActionListener {
             if (src.equals(main.getBtnPetugas())){
                 main.setVisible(false);
                 petugas.setVisible(true);
-                if (src.equals(petugas.getBtnAdd())){
-                Petugas p = new Petugas(petugas.getIdPetugas(),petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
-                try {
-                    db.savePetugas(p);
-                    petugas.viewAll(db.loadAllPetugas());
-                } catch (SQLException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }//edit petugas
+                if (src.equals(petugas.getBtnAdd())){//add petugas
+                    Petugas p = new Petugas(petugas.getIdPetugas(),petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
+                    try {
+                        db.savePetugas(p);
+                        petugas.viewAll(db.loadAllPetugas());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }//edit petugas
                 }else if (src.equals(petugas.getBtnEdit())) {
-                try {
-                Petugas p = db.loadAllPetugas().get(selected);
-                p.setNama(petugas.getTxtNmPetugas().getText());
-                p.setAlamat(petugas.getAlamatPetugas());
-                p.setNoHP(petugas.getNoHPPetugas());
-                db.updatePetugas(p);
-                petugas.reset();
-                petugas.viewAll(db.loadAllPetugas());
-                }catch (SQLException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    try {
+                        Petugas p = db.loadAllPetugas().get(selected);
+                        p.setNama(petugas.getTxtNmPetugas().getText());
+                        p.setAlamat(petugas.getAlamatPetugas());
+                        p.setNoHP(petugas.getNoHPPetugas());
+                        db.updatePetugas(p);
+                        petugas.reset();
+                        petugas.viewAll(db.loadAllPetugas());
+                    }catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }else if(src.equals(main.getBtnPelanggan())){
-                
+                Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(), pelanggan.getTfNamaPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
+                try {
+                    db.savePelanggan(p);
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                } catch (SQLException ex) {
+                }
             }
         //add Petugas
             
