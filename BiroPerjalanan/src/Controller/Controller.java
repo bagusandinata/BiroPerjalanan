@@ -68,7 +68,7 @@ public class Controller extends MouseAdapter implements ActionListener {
             if (src.equals(main.getBtnPetugas())){
                 main.setVisible(false);
                 petugas.setVisible(true);
-                if (src.equals(petugas.getBtnAdd())){//add petugas
+            }else if (src.equals(petugas.getBtnAdd())){//add petugas
                     Petugas p = new Petugas(petugas.getIdPetugas(),petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
                     try {
                         db.savePetugas(p);
@@ -76,7 +76,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                     } catch (SQLException ex) {
                         Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                     }//edit petugas
-                }else if (src.equals(petugas.getBtnEdit())) {
+            }else if (src.equals(petugas.getBtnEdit())) {
                     try {
                         Petugas p = db.loadAllPetugas().get(selected);
                         p.setNama(petugas.getTxtNmPetugas().getText());
@@ -88,7 +88,6 @@ public class Controller extends MouseAdapter implements ActionListener {
                     }catch (SQLException ex) {
                         Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
             }else if(src.equals(main.getBtnPelanggan())){
                 Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(), pelanggan.getTfNamaPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
                 try {
