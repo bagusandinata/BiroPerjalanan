@@ -150,7 +150,7 @@ public class FramePelanggan extends javax.swing.JFrame implements View{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        i = new View.backgroundLogin();
+        i = new org.netbeans.modules.form.InvalidComponent();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPelanggan = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -207,6 +207,12 @@ public class FramePelanggan extends javax.swing.JFrame implements View{
         btnCari.setText("CARI");
 
         btnCariId.setText("CARI ID");
+
+        tfNamaPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNamaPelangganActionPerformed(evt);
+            }
+        });
 
         tfNoHpPelanggan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,13 +276,14 @@ public class FramePelanggan extends javax.swing.JFrame implements View{
                     .addComponent(jLabel4)
                     .addComponent(tfNoHpPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHapus)
-                    .addComponent(btnBatal)
-                    .addComponent(btnTambah)
-                    .addComponent(btnEdit)
-                    .addComponent(btnCari)
-                    .addComponent(btnCariId))
+                .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBatal, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnHapus)
+                        .addComponent(btnTambah)
+                        .addComponent(btnEdit)
+                        .addComponent(btnCari)
+                        .addComponent(btnCariId)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -306,6 +313,10 @@ public class FramePelanggan extends javax.swing.JFrame implements View{
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNoHpPelangganActionPerformed
 
+    private void tfNamaPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNamaPelangganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNamaPelangganActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,7 +329,7 @@ public class FramePelanggan extends javax.swing.JFrame implements View{
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
-    private View.backgroundLogin i;
+    private org.netbeans.modules.form.InvalidComponent i;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

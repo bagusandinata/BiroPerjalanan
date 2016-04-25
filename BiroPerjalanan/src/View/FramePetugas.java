@@ -5,7 +5,6 @@
  */
 package View;
 
-import Models.Petugas;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
@@ -171,7 +170,7 @@ public class FramePetugas extends javax.swing.JFrame implements View{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        i = new View.backgroundLogin();
+        i = new org.netbeans.modules.form.InvalidComponent();
         tfNamaPetugas = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPetugas = new javax.swing.JTable();
@@ -306,13 +305,14 @@ public class FramePetugas extends javax.swing.JFrame implements View{
                     .addComponent(jLabel6)
                     .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
-                .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHapus)
-                    .addComponent(btnBatal)
-                    .addComponent(btnTambah)
-                    .addComponent(btnEdit)
-                    .addComponent(btnCari)
-                    .addComponent(btnCariId))
+                .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBatal, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(iLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnHapus)
+                        .addComponent(btnTambah)
+                        .addComponent(btnEdit)
+                        .addComponent(btnCari)
+                        .addComponent(btnCariId)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -350,7 +350,7 @@ public class FramePetugas extends javax.swing.JFrame implements View{
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
-    private View.backgroundLogin i;
+    private org.netbeans.modules.form.InvalidComponent i;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
