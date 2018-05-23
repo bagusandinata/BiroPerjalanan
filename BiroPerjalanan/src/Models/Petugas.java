@@ -13,16 +13,25 @@ package Models;
 public class Petugas extends Orang {
     private String idPetugas;
     private String alamat;
+    private String username;
+    private String password;
 
-    public Petugas(String idPetugas, String nama,String alamat, String noHP) {
+    public Petugas() {
+    }
+    
+    public Petugas(String idPetugas, String nama,String alamat, String noHP, String username, String password) {
         super(nama, noHP);
         this.idPetugas = idPetugas;
         this.alamat = alamat;
+        this.username = username;
+        this.password = password;
     }
 
-    public Petugas(String nama, String alamat, String noHP) {
+    public Petugas(String nama, String alamat, String noHP, String username, String password) {
      super(nama,noHP);
      this.alamat = alamat;
+     this.username = username;
+     this.password = password;
     }
     
     @Override
@@ -43,12 +52,29 @@ public class Petugas extends Orang {
         this.alamat = alamat;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
     public String getIdPetugas() {
         return idPetugas;
     }
 
     public String getAlamat() {
         return alamat;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
    
     @Override

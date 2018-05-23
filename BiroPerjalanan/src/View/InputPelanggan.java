@@ -5,9 +5,13 @@
  */
 package View;
 
+import Models.Pelanggan;
+import Models.Petugas;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -61,7 +65,18 @@ public class InputPelanggan extends javax.swing.JFrame {
     public void setTfNoHpPelanggan(JTextField tfNoHpPelanggan) {
         this.tfNoHpPelanggan = tfNoHpPelanggan;
     }
-
+    
+    public void viewAll(ArrayList<Pelanggan> list) {
+        String[] title = {"Id Pelanggan","Nama Pelanggan","No HP Petugas"};
+        String[][] data = new String[list.size()][3];
+        for (int i = 0; i < list.size(); i++) {
+            Pelanggan p = list.get(i);
+            data[i][0] = p.getIdPelanggan();
+            data[i][1] = p.getNama();
+            data[i][2] = p.getNoHP();
+        }
+        tbPelanggan.setModel(new DefaultTableModel(data,title));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

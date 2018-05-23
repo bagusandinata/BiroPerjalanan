@@ -4,53 +4,70 @@
  * and open the template in the editor.
  */
 package Controller;
-import Config.Database;
+import Database.Database;
 import Models.AplikasiKonsol;
+import Models.Pelanggan;
 import Models.Petugas;
-import View.InputPelanggan;
-import View.InputPetugas;
-import View.MenuUtama;
+import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Controller extends MouseAdapter implements ActionListener {
 
     public AplikasiKonsol app;
     public Database db;
-    public InputPetugas petugas;
-    public InputPelanggan pelanggan;
-    public Petugas pet;
     private int selected;
-    private MenuUtama main;
+    private FrameLogin login;
+    private FrameMenu menu;
+    private FramePetugas petugas;
+    private FramePelanggan pelanggan;
+    private View view;
+    
     public Controller() throws SQLException {
-        
         app = new AplikasiKonsol();
         db = new Database();
         db.connect();
-        petugas = new InputPetugas();
+        login = new FrameLogin();
+        login.addListener(this);
+        login.setVisible(true);
+        view = login;
+        petugas = new FramePetugas();
+        pelanggan = new FramePelanggan();
         petugas.addAdapter(this);
         petugas.addListener(this);
         petugas.viewAll(db.loadAllPetugas());
-        main = new MenuUtama();
-        main.addListener(this);
-        main.setVisible(true);
     }
+    
     @Override
     public void mouseClicked(MouseEvent me) {
         Object o = me.getSource();
-        if (o.equals(petugas.getTbPetugas())) {
-            try {
-                selected = petugas.getTbPetugas().getSelectedRow();
-                Petugas p = db.loadAllPetugas().get(selected);
-                petugas.view(p);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+        if(view instanceof FramePetugas){
+            if (o.equals(petugas.getTbPetugas())) {
+                try {
+                    selected = petugas.getTbPetugas().getSelectedRow();
+                    Petugas p = db.loadAllPetugas().get(selected);
+                    petugas.view(p);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }else if(view instanceof FramePelanggan){
+            if(o.equals(pelanggan.getTbPelanggan())) {
+                try {
+                    selected = pelanggan.getTbPelanggan().getSelectedRow();
+                    Pelanggan p = db.loadAllPelanggan().get(selected);
+                    pelanggan.view(p);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
@@ -63,116 +80,361 @@ public class Controller extends MouseAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
-            if (src.equals(main.getBtnPetugas())){
-                main.setVisible(false);
+        if (view instanceof FrameLogin){
+            login = (FrameLogin) view;
+            if (src.equals(login.getBtnLogin())){
+                menu = new FrameMenu();
+                try {
+                    ResultSet rs = db.getData("select * from t_petugas where username ='"+login.getTfUsername().getText()+"'");
+                    if(rs.next()){
+                        if(login.getTfPassword().getText().equals(rs.getString("password"))){
+                            menu = new FrameMenu();
+                            Petugas p = new Petugas(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6));                        
+                            menu.setVisible(true);
+                            menu.addListener(this);
+                            login.dispose();
+                            view = menu;
+                        }else{
+                            JOptionPane.showMessageDialog(menu, "Login Gagal");
+                        }
+                        }else{
+                            JOptionPane.showMessageDialog(menu, "Username Tidak Tersedia");
+                        }
+                }catch (SQLException ex) {
+                        Logger.getLogger(FrameLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }else if (view instanceof FrameMenu) {
+            menu = (FrameMenu) view;
+            if (src.equals(menu.getBtnPetugas())) {
+                petugas = new FramePetugas();
                 petugas.setVisible(true);
-                if (src.equals(petugas.getBtnAdd())){
-                Petugas p = new Petugas(petugas.getIdPetugas(),petugas.getTxtNmPetugas().getText(),petugas.getAlamatPetugas(), petugas.getNoHPPetugas());
+                petugas.addListener(this);
+                petugas.addAdapter(this);
+                try {
+                    petugas.viewAll(db.loadAllPetugas());
+                    petugas.getBtnHapus().setEnabled(false);
+                    petugas.getBtnEdit().setEnabled(false);
+                    petugas.getBtnCari().setEnabled(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                menu.dispose();
+                view = petugas;
+            }else if (src.equals(menu.getBtnPelanggan())) {
+                pelanggan = new FramePelanggan();
+                pelanggan.setVisible(true);
+                pelanggan.addListener(this);
+                pelanggan.addAdapter(this);
+                try {
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                    pelanggan.getBtnHapus().setEnabled(false);
+                    pelanggan.getBtnEdit().setEnabled(false);
+                    pelanggan.getBtnCari().setEnabled(false);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                menu.dispose();
+                view = pelanggan;
+            }else if (src.equals(menu.getBtnPerjalanan())){
+                
+            }else if (src.equals(menu.getBtnPaketWisata())){
+                
+            }else if (src.equals(menu.getBtnTempatWisata())){
+                
+            }else if (src.equals(menu.getBtnLogout())){
+                
+            }
+        }else if (view instanceof FramePetugas) {
+            petugas = (FramePetugas) view;
+            try {
+                petugas.viewAll(db.loadAllPetugas());
+            } catch (SQLException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }//tambah petugas
+            if (src.equals(petugas.getBtnTambah())){
+                Petugas p = new Petugas(petugas.getTfIdPetugas().getText(),petugas.getTfNamaPetugas().getText(),petugas.getTfAlamatPetugas().getText(), petugas.getTfNoHpPetugas().getText(),petugas.getTfUsername().getText(), petugas.getTfPassword().getText());
                 try {
                     db.savePetugas(p);
                     petugas.viewAll(db.loadAllPetugas());
+                    petugas.reset();
                 } catch (SQLException ex) {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }//edit petugas
-                }else if (src.equals(petugas.getBtnEdit())) {
+                }
+                petugas.getBtnHapus().setEnabled(false);
+                petugas.getBtnEdit().setEnabled(false);
+                petugas.getBtnCari().setEnabled(false);
+            }else if (src.equals(petugas.getBtnEdit())) {//edit petugas
+                if(petugas.getTfIdPetugas() != null){
+                    try {
+                        Petugas p = new Petugas(petugas.getTfIdPetugas().getText(),petugas.getTfNamaPetugas().getText(),petugas.getTfAlamatPetugas().getText(), petugas.getTfNoHpPetugas().getText(),petugas.getTfUsername().getText(), petugas.getTfPassword().getText());
+                        try {
+                            db.updatePetugas(p);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        petugas.reset();
+                        petugas.viewAll(db.loadAllPetugas());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    try {
+                        Petugas p = db.loadAllPetugas().get(selected);
+                        p.setNama(petugas.getTfNamaPetugas().getText());
+                        p.setAlamat(petugas.getTfAlamatPetugas().getText());
+                        p.setNoHP(petugas.getTfNoHpPetugas().getText());
+                        p.setUsername(petugas.getTfUsername().getText());
+                        p.setPassword(petugas.getTfPassword().getText());
+                        db.updatePetugas(p);
+                        petugas.reset();
+                        petugas.viewAll(db.loadAllPetugas());
+                    }catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                petugas.getBtnEdit().setEnabled(false);
+                petugas.getBtnHapus().setEnabled(false);
+                petugas.getBtnCari().setEnabled(false);
+            }else if (src.equals(petugas.getBtnHapus())) {
                 try {
-                Petugas p = db.loadAllPetugas().get(selected);
-                p.setNama(petugas.getTxtNmPetugas().getText());
-                p.setAlamat(petugas.getAlamatPetugas());
-                p.setNoHP(petugas.getNoHPPetugas());
-                db.updatePetugas(p);
+                    Petugas p = db.loadAllPetugas().get(selected);
+                    db.deletePetugas(p);
+                    petugas.reset();
+                    petugas.viewAll(db.loadAllPetugas());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if (src.equals(petugas.getBtnBatal())){
                 petugas.reset();
-                petugas.viewAll(db.loadAllPetugas());
+                petugas.getBtnHapus().setEnabled(false);
+                petugas.getBtnEdit().setEnabled(false);
+                petugas.getBtnCari().setEnabled(false);
+                petugas.getTfNamaPetugas().setEditable(true);
+                petugas.getTfNoHpPetugas().setEditable(true);
+                petugas.getTfAlamatPetugas().setEditable(true);
+                petugas.getTfUsername().setEditable(true);
+                petugas.getTfPassword().setEditable(true);
+            }else if (src.equals(petugas.getBtnCariId())){
+                petugas.reset();
+                petugas.getBtnCariId().setEnabled(false);
+                petugas.getBtnTambah().setEnabled(false);
+                petugas.getBtnEdit().setEnabled(false);
+                petugas.getBtnHapus().setEnabled(false);
+                petugas.getTfNamaPetugas().setEditable(false);
+                petugas.getTfNoHpPetugas().setEditable(false);
+                petugas.getTfAlamatPetugas().setEditable(false);
+                petugas.getTfUsername().setEditable(false);
+                petugas.getTfPassword().setEditable(false);
+                petugas.getBtnCari().setVisible(true);
+            }else if (src.equals(petugas.getBtnCari())){
+                try {
+                    Petugas p = db.findPetugas(petugas.getTfIdPetugas().getText());
+                    petugas.view(p);
+                    petugas.getTfNamaPetugas().setEditable(true);
+                    petugas.getTfNoHpPetugas().setEditable(true);
+                    petugas.getTfAlamatPetugas().setEditable(true);
+                    petugas.getTfUsername().setEditable(true);
+                    petugas.getTfPassword().setEditable(true);
+                    
                 }catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                petugas.getBtnTambah().setEnabled(false);
+                petugas.getBtnCari().setEnabled(false);
+            }      
+        }else if(view instanceof FramePelanggan){
+            pelanggan = (FramePelanggan) view;
+            try {
+                pelanggan.viewAll(db.loadAllPelanggan());
+            } catch (SQLException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }//tambah pelanggan
+            if (src.equals(pelanggan.getBtnTambah())){
+                Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(),pelanggan.getTfNamaPelanggan().getText(),pelanggan.getTfAlamatPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
+                try {
+                    db.savePelanggan(p);
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                    pelanggan.reset();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+            }else if (src.equals(pelanggan.getBtnEdit())) {//edit pelanggan
+                if(pelanggan.getTfIdPelanggan()!= null){
+                    try {
+                        Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(),pelanggan.getTfNamaPelanggan().getText(),pelanggan.getTfAlamatPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
+                        try {
+                            db.updatePelanggan(p);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        pelanggan.reset();
+                        pelanggan.viewAll(db.loadAllPelanggan());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    try {
+                        Pelanggan p = db.loadAllPelanggan().get(selected);
+                        p.setNama(pelanggan.getTfNamaPelanggan().getText());
+                        p.setAlamat(pelanggan.getTfAlamatPelanggan().getText());
+                        p.setNoHP(pelanggan.getTfNoHpPelanggan().getText());
+                        db.updatePelanggan(p);
+                        pelanggan.reset();
+                        pelanggan.viewAll(db.loadAllPelanggan());
+                    }catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }else if(src.equals(main.getBtnPelanggan())){
-                
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+            }else if (src.equals(petugas.getBtnHapus())) {//delete pelanggan
+                try {
+                    Pelanggan p = db.loadAllPelanggan().get(selected);
+                    db.deletePelanggan(p);
+                    pelanggan.reset();
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if (src.equals(pelanggan.getBtnBatal())){//cancel
+                pelanggan.reset();
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+                pelanggan.getTfNamaPelanggan().setEditable(true);
+                pelanggan.getTfNoHpPelanggan().setEditable(true);
+                pelanggan.getTfAlamatPelanggan().setEditable(true);
+            }else if (src.equals(petugas.getBtnCariId())){//cari pelanggan based on id
+                pelanggan.reset();
+                pelanggan.getBtnCariId().setEnabled(false);
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+                pelanggan.getTfNamaPelanggan().setEditable(false);
+                pelanggan.getTfNoHpPelanggan().setEditable(false);
+                pelanggan.getTfAlamatPelanggan().setEditable(false);
+                petugas.getBtnCari().setVisible(true);
+            }else if (src.equals(pelanggan.getBtnCari())){
+                try {
+                    Pelanggan p = db.findPelanggan(pelanggan.getTfIdPelanggan().getText());
+                    pelanggan.view(p);
+                    pelanggan.getTfNamaPelanggan().setEditable(true);
+                    pelanggan.getTfNoHpPelanggan().setEditable(true);
+                    pelanggan.getTfAlamatPelanggan().setEditable(true);
+                    
+                }catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                pelanggan.getBtnTambah().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
             }
-        //add Petugas
-            
-            }
-        //save
-        
-        //Index
-        /*if (src.equals(index.getjButtonSignUp())) {
-            index.setVisible(false);
-            signUp.setVisible(true);
         }
-        if (src.equals(index.getjButtonLogin())) {
-            index.setVisible(false);
-            login.setVisible(true);
-        }*/
-/*
+    }
+}
+//        //Index
+//        if (src.equals(index.getjButtonSignUp())) {
+//            index.setVisible(false);
+//            signUp.setVisible(true);
+//        }
+//        if (src.equals(index.getjButtonLogin())) {
+//            index.setVisible(false);
+//            login.setVisible(true);
+        /*
         //SignUp
         if (src.equals(signUp.getjButtonSignUp())) {
             try {
-                Pelanggan p = new Pelanggan(signUp.getTxtNama().getText(),
-                        signUp.getTxtJenkel().getText(),
-                        signUp.getTxtNotelp().getText());
-                if (app.insertPelanggan(p)) {
-                    signUp.showMessage("Insert Berhasil !!");
-                } else {
-                    signUp.showMessage("Insert gagal coy !!!", "ERROR INSERT",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+                pelanggan.viewAll(db.loadAllPelanggan());
             } catch (SQLException ex) {
-                System.out.println("Insert Error");
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-*/
-        //Login
-/*        if (src.equals(login.getjButtonLogin())) {
-            try {
-                String nama = login.getTxtNama().getText();
-                String notelp = login.getTxtNotelp().getText();
-                Pelanggan p = new Pelanggan(nama, notelp);
-                if (app.cekLoginPelanggan(p)) {
-                    login.setVisible(false);
-                    menupel.setVisible(true);
+            if (src.equals(pelanggan.getBtnTambah())){
+                Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(),pelanggan.getTfNamaPelanggan().getText(),pelanggan.getTfAlamatPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
+                try {
+                    db.savePelanggan(p);
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                    pelanggan.reset();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ea) {
-                ea.printStackTrace();
-            }
-        }
-*/
-/*        //Menu Pelanggan
-        if (src.equals(menupel.getjButtonTransportasi())) {
-            try {
-                pesan.setVisible(true);
-                menupel.setVisible(false);
-            } catch (Exception ae) {
-                pesan.showMessage("Gagal");
-                ae.printStackTrace();
-            }
-        }
-
-        //PesanTransport
-        if (src.equals(pesan.getjButtonPesan())) {
-            try {
-                Pelanggan p = new Pelanggan(UserSession.getId_ss(),
-                        UserSession.getNama_ss(),
-                        UserSession.getJenkel_ss(),
-                        UserSession.getNotelp_ss());
-                Pesanan ps = p.createPesanan("Transport", pesan.getjTextFieldLokasi().getText(),
-                        pesan.getjTextFieldTujuan().getText(),
-                        Integer.parseInt(pesan.getjTextFieldJarak().getText()),
-                        Integer.parseInt(pesan.getjTextFieldTarif().getText()));
-                if (app.insertPesanan(ps, p.getIdPelanggan())) {
-                    pesan.showMessage("Pesanan Sukses");
-                    menupel.setVisible(true);
-                    pesan.setVisible(false);
-                } else {
-                    pesan.showMessage("Input Gagal");
-                    menupel.setVisible(true);
-                    pesan.setVisible(false);
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+            }else if (src.equals(pelanggan.getBtnEdit())) {
+                if(pelanggan.getTfIdPelanggan() != null){
+                    try {
+                        Pelanggan p = new Pelanggan(pelanggan.getTfIdPelanggan().getText(),pelanggan.getTfNamaPelanggan().getText(),pelanggan.getTfAlamatPelanggan().getText(), pelanggan.getTfNoHpPelanggan().getText());
+                        try {
+                            db.updatePelanggan(p);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        pelanggan.reset();
+                        pelanggan.viewAll(db.loadAllPelanggan());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    try {
+                        Pelanggan p = db.loadAllPelanggan().get(selected);
+                        p.setNama(pelanggan.getTfNamaPelanggan().getText());
+                        p.setAlamat(pelanggan.getTfAlamatPelanggan().getText());
+                        p.setNoHP(pelanggan.getTfNoHpPelanggan().getText());
+                        db.updatePelanggan(p);
+                        pelanggan.reset();
+                        pelanggan.viewAll(db.loadAllPelanggan());
+                    }catch (SQLException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            } catch (Exception ea) {
-                ea.printStackTrace();
-                menupel.setVisible(true);
-                pesan.setVisible(false);
-            }
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+            }else if (src.equals(pelanggan.getBtnHapus())) {
+                try {
+                    Pelanggan p = db.loadAllPelanggan().get(selected);
+                    db.deletePelanggan(p);
+                    pelanggan.reset();
+                    pelanggan.viewAll(db.loadAllPelanggan());
+                } catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if (src.equals(pelanggan.getBtnBatal())){
+                pelanggan.reset();
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+                pelanggan.getTfNamaPelanggan().setEditable(true);
+                pelanggan.getTfNoHpPelanggan().setEditable(true);
+                pelanggan.getTfAlamatPelanggan().setEditable(true);
+            }else if (src.equals(pelanggan.getBtnCariId())){
+                pelanggan.reset();
+                pelanggan.getBtnCariId().setEnabled(false);
+                pelanggan.getBtnTambah().setEnabled(false);
+                pelanggan.getBtnEdit().setEnabled(false);
+                pelanggan.getBtnHapus().setEnabled(false);
+                pelanggan.getTfNamaPelanggan().setEditable(false);
+                pelanggan.getTfNoHpPelanggan().setEditable(false);
+                pelanggan.getTfAlamatPelanggan().setEditable(false);
+                pelanggan.getBtnCari().setVisible(true);
+            }else if (src.equals(pelanggan.getBtnCari())){
+                try {
+                    Pelanggan p = db.findPelanggan(pelanggan.getTfIdPelanggan().getText());
+                    pelanggan.view(p);
+                    pelanggan.getTfNamaPelanggan().setEditable(true);
+                    pelanggan.getTfAlamatPelanggan().setEditable(true);
+                    pelanggan.getTfNoHpPelanggan().setEditable(true);
+                }catch (SQLException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                pelanggan.getBtnTambah().setEnabled(false);
+                pelanggan.getBtnCari().setEnabled(false);
+            }        
         }
-*/
     }
+}*/
+
